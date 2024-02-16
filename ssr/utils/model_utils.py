@@ -1,6 +1,6 @@
-from ssr.archs.highresnet_arch import HighResNet
-from ssr.archs.srcnn_arch import SRCNN
-from ssr.archs.rrdbnet_arch import SSR_RRDBNet
+from archs.highresnet_arch import HighResNet
+from archs.srcnn_arch import SRCNN
+from archs.rrdbnet_arch import SSR_RRDBNet
 
 def build_network(opt):
     scale = int(opt['scale'])

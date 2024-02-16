@@ -6,9 +6,9 @@ import argparse
 import skimage.io
 import numpy as np
 
-from ssr.utils.infer_utils import format_s2naip_data
-from ssr.utils.options import yaml_load
-from ssr.utils.model_utils import build_network
+from utils.infer_utils import format_s2naip_data
+from utils.options import yaml_load
+from utils.model_utils import build_network
 
 
 if __name__ == "__main__":
