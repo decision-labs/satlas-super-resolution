@@ -40,7 +40,8 @@ if __name__ == "__main__":
 
     # The images in the data_dir for inference should be pngs and the directory structure should look
     # like: {data_dir}/sentinel2/{subdir}/*.png where each png is of shape [n_s2_images * 32, 32, 3].
-    pngs = glob.glob(data_dir + "*/*.png")
+    # pngs = glob.glob(data_dir + "*/*.png")
+    pngs = sorted(glob.glob(data_dir + "/**/*.png"), key=lambda x: (int(x.split('/')[-1].split('_')[0]), int(x.split('/')[-1].split('_')[1].replace(".png", ""))))
     print("Running inference on ", len(pngs), " images.")
 
     for i,png in enumerate(pngs):
