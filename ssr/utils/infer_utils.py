@@ -4,6 +4,7 @@ import skimage.io
 import numpy as np
 
 def format_s2naip_data(s2_data, n_s2_images, device):
+    print(s2_data.shape)
     # Reshape to be Tx32x32x3.
     s2_chunks = np.reshape(s2_data, (-1, 32, 32, 3))
 
@@ -18,6 +19,8 @@ def format_s2naip_data(s2_data, n_s2_images, device):
             bads.append(i)
         else:
             goods.append(i)
+    # for i, ts in enumerate(s2_chunks):
+    #     goods.append(i)
 
     # Pick {n_s2_images} random indices of s2 images to use. Skip ones that are partially black.
     if len(goods) >= n_s2_images:
@@ -25,6 +28,7 @@ def format_s2naip_data(s2_data, n_s2_images, device):
     else:
         need = n_s2_images - len(goods)
         rand_indices = goods + random.sample(bads, need)
+    # rand_indices = goods[:n_s2_images]
 
     s2_chunks = [s2_chunks[i] for i in rand_indices]
     s2_chunks = np.array(s2_chunks)

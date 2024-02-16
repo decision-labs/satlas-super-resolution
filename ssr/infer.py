@@ -43,14 +43,19 @@ if __name__ == "__main__":
     print("Running inference on ", len(pngs), " images.")
 
     for i,png in enumerate(pngs):
-
+    # for i in range(len(pngs)):
+    #     png = pngs[i: i+8]
+    #     if len(png) < n_lr_images:
+    #         continue
         save_dir = os.path.join(save_path, str(i))
         os.makedirs(save_dir, exist_ok=True)
 
         im = skimage.io.imread(png)
+        # im = np.concatenate([skimage.io.imread(f) for f in png], axis=2)
 
         # Feed the low-res images through the super-res model.
         input_tensor, s2_image = format_s2naip_data(im, n_lr_images, device)
+        # input_tensor = torch.as_tensor(im).permute(2, 0, 1).to(device).float()/255
         output = model(input_tensor)
 
         # Save the low-res input image in the same dir as the super-res image so
